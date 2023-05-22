@@ -6,17 +6,18 @@ import Loader from "./Loader";
 
 const PostList = () => {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.props);
+  const posts = useSelector((state) => state.posts.posts);
   const isLoading = useSelector((state) => state.isLoading);
 
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
-
   return (
     <div>
       {isLoading ? (
         <Loader />
+      ) : posts.length === 0 ? (
+        <p>No posts available</p>
       ) : (
         posts.map((post) => (
           <Post

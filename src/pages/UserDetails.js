@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import UserInfo from "../components/UserInfo";
 import Post from "../components/Post";
 import Loader from "../components/Loader";
+import { fetchUser, fetchUserPosts } from "../redux/actions/userActions";
 
 const UserDetails = ({ match }) => {
   const dispatch = useDispatch();
