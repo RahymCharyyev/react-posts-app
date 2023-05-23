@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPosts, toggleComments } from "../redux/actions/postActions";
+import { fetchPosts } from "../redux/actions/postActions";
+import { fetchComments } from "../redux/actions/commentsActions";
 import Post from "./Post";
 import Loader from "./Loader";
+
+import { Alert, Container, Row, Col } from "react-bootstrap";
 
 const PostList = () => {
   const dispatch = useDispatch();
@@ -12,22 +15,28 @@ const PostList = () => {
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
+
   return (
-    <div>
+    <>
       {isLoading ? (
         <Loader />
       ) : posts.length === 0 ? (
-        <p>No posts available</p>
+        <Alert variant="info">No posts available</Alert>
       ) : (
-        posts.map((post) => (
-          <Post
-            key={post.id}
-            post={post}
-            toggleComments={() => dispatch(toggleComments(post.id))}
-          />
-        ))
+        <Container fluid>
+          <Row xs={1} md={2} lg={3} xl={4} className="g-4">
+            {posts.map((post) => (
+              <Col key={post.id}>
+                <Post
+                  post={post}
+                  toggleComments={() => dispatch(fetchComments(post.id))}
+                />
+              </Col>
+            ))}
+          </Row>
+        </Container>
       )}
-    </div>
+    </>
   );
 };
 

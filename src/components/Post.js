@@ -1,43 +1,65 @@
 import React, { useState } from "react";
-import { Button, Card, Collapse } from "react-bootstrap";
+import { Accordion, Button, Card, Collapse, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchComments } from "../redux/actions/commentsActions";
+import img from "../assets/avatar.svg";
 
 const Post = ({ post }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+  const comments = useSelector((state) => state.posts.comments[post.id]);
 
   const toggleComments = () => {
+    if (!isOpen && !comments) {
+      dispatch(fetchComments(post.id));
+    }
     setIsOpen(!isOpen);
   };
 
   return (
-    <Card className="mb-4">
-      <Card.Body>
-        <Card.Title>{post.title}</Card.Title>
-        <Card.Text>{post.body}</Card.Text>
-        <div className="d-flex align-items-center">
-          <Button
-            variant="link"
-            onClick={toggleComments}
-            aria-expanded={isOpen}
-            aria-controls={`comments${post.id}`}
-          ></Button>
-          <Link to={`/user/${post.userId}`}>
-            <img
-              src="avatar.jpg"
-              alt="Avatar"
-              width={30}
-              height={30}
-              className="ml-auto"
-            />
-          </Link>
-        </div>
-        <Collapse in={isOpen}>
-          <div id={`comments-${post.id}`} className="mt-3">
-            {/* Render comments */}
-          </div>
-        </Collapse>
-      </Card.Body>
-    </Card>
+    <>
+      <Accordion>
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>
+            <Link to={`/user/${post.userId}`}>
+              <Card.Img
+                variant="top"
+                src={img}
+                alt="Avatar"
+                style={{ width: "50px", height: "50px" }}
+              />
+            </Link>
+            <Container className="text-center">{post.title}</Container>
+          </Accordion.Header>
+          <Accordion.Body>
+            <Container className="text-center">{post.body}</Container>
+            <div className="d-flex justify-content-center">
+              <Button
+                variant="primary"
+                onClick={toggleComments}
+                aria-expanded={isOpen}
+                aria-controls={`comments${post.id}`}
+                className="mt-2 justify-content-center"
+              >
+                {isOpen ? "Закрыть комментарии" : "Открыть комментарии"}
+              </Button>
+            </div>
+            <Collapse in={isOpen}>
+              <div id={`comments-${post.id}`} className="mt-3">
+                {comments &&
+                  comments.map((comment) => (
+                    <div key={comment.id}>
+                      <h5>{comment.email}</h5>
+                      <p>{comment.body}</p>
+                    </div>
+                  ))}
+              </div>
+            </Collapse>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+    </>
   );
 };
 

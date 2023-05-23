@@ -1,35 +1,15 @@
 import {
-  FETCH_POSTS,
-  FETCH_POSTS_SUCCESS,
-  FETCH_POSTS_FAILURE,
   FETCH_COMMENTS_SUCCESS,
   FETCH_COMMENTS_FAILURE,
-} from "../actions/postActions";
+} from "../actions/commentsActions";
 
 const initialState = {
-  posts: [],
   comments: {},
   isLoading: false,
 };
 
-const postReducer = (state = initialState, action) => {
+const commentsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_POSTS:
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case FETCH_POSTS_SUCCESS:
-      return {
-        ...state,
-        posts: action.payload,
-        isLoading: false,
-      };
-    case FETCH_POSTS_FAILURE:
-      return {
-        ...state,
-        isLoading: false,
-      };
     case FETCH_COMMENTS_SUCCESS:
       return {
         ...state,
@@ -51,4 +31,4 @@ const postReducer = (state = initialState, action) => {
   }
 };
 
-export default postReducer;
+export default commentsReducer;

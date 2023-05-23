@@ -4,7 +4,6 @@ import Menu from "./components/Menu";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import UserDetails from "./pages/UserDetails";
-
 function App() {
   return (
     <Router>

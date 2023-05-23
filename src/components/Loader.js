@@ -5,7 +5,7 @@ const Loader = () => {
   return (
     <div className="text-center mt-5">
       <Spinner animation="border" role="status">
-        <span className="sr-only">Loading...</span>
+        <span className="visually-hidden">Loading...</span>
       </Spinner>
     </div>
   );
