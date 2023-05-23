@@ -1,27 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "../redux/actions/postActions";
 import { fetchComments } from "../redux/actions/commentsActions";
 import Post from "./Post";
 import Loader from "./Loader";
 
-import { Alert, Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 const PostList = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.posts);
-  const isLoading = useSelector((state) => state.isLoading);
+  const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchPosts());
+    setShowLoader(true);
+
+    const delay = setTimeout(() => {
+      dispatch(fetchPosts());
+      setShowLoader(false);
+    }, 500);
+
+    return () => clearTimeout(delay);
   }, [dispatch]);
 
   return (
     <>
-      {isLoading ? (
+      {showLoader ? (
         <Loader />
-      ) : posts.length === 0 ? (
-        <Alert variant="info">No posts available</Alert>
       ) : (
         <Container fluid>
           <Row xs={1} md={2} lg={3} xl={4} className="g-4">

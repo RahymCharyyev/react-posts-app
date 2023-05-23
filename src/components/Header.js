@@ -1,40 +1,41 @@
 import React from "react";
-import { Image, Nav, Navbar } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Container, Image, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import img from "../assets/avatar.svg";
+import Menu from "./Menu";
 const Header = () => {
-  const user = useSelector((state) => state.user);
   return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
-          <Nav.Link as={Link} to="/" className="text-dark font-weight-bold">
-            Список постов
-          </Nav.Link>
-          <Nav.Link
-            as={Link}
-            to="/about"
-            className="text-dark font-weight-bold"
-          >
-            Обо мне
-          </Nav.Link>
-        </Nav>
-        <Nav>
-          <Navbar.Text className="mr-3">
-            <Image
-              src={img}
-              roundedCircle
-              width={30}
-              height={30}
-              className="mr-2"
-            />
-            <span className="text-dark font-weight-bold">{user.name}</span>
-          </Navbar.Text>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    <>
+      {[false].map((expand) => (
+        <Navbar key={expand} bg="light" expand={expand} className="mb-3">
+          <Container fluid>
+            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
+            <Navbar.Offcanvas
+              id={`offcanvasNavbar-expand-${expand}`}
+              aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+              placement="start"
+            >
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                  Меню
+                </Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+                <Nav className="justify-content-end flex-grow-1 pe-3">
+                  <Image src={img} width={30} height={30} />
+                  <span className="text-dark font-weight-bold">
+                    Чарыев Рахим
+                  </span>
+                  <span className="text-dark font-weight-bold">
+                    Email: r569837@gmail.com
+                  </span>
+                  <Menu />
+                </Nav>
+              </Offcanvas.Body>
+            </Navbar.Offcanvas>
+          </Container>
+        </Navbar>
+      ))}
+    </>
   );
 };
 
