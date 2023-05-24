@@ -4,6 +4,9 @@ import {
   FETCH_POSTS,
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_FAILURE,
+  FETCH_COMMENTS,
+  FETCH_COMMENTS_SUCCESS,
+  FETCH_COMMENTS_FAILURE,
 } from "../actions/postActions";
 
 function* fetchPostsSaga() {
@@ -21,6 +24,25 @@ function* fetchPostsSaga() {
   }
 }
 
+function* fetchCommentsSaga(action) {
+  try {
+    const response = yield call(
+      axios.get,
+      `https://jsonplaceholder.typicode.com/posts/${action.payload}/comments`
+    );
+    yield put({
+      type: FETCH_COMMENTS_SUCCESS,
+      payload: { postId: action.payload, comments: response.data },
+    });
+  } catch (error) {
+    yield put({
+      type: FETCH_COMMENTS_FAILURE,
+      payload: error.message,
+    });
+  }
+}
+
 export default function* postSaga() {
   yield takeLatest(FETCH_POSTS, fetchPostsSaga);
+  yield takeLatest(FETCH_COMMENTS, fetchCommentsSaga);
 }

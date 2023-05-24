@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Accordion, Button, Card, Collapse, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchComments } from "../redux/actions/commentsActions";
+import { fetchComments } from "../redux/actions/postActions";
 import img from "../assets/avatar.svg";
 
 const Post = ({ post }) => {

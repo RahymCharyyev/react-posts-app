@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "../redux/actions/postActions";
-import { fetchComments } from "../redux/actions/commentsActions";
+import { fetchComments } from "../redux/actions/postActions";
 import Post from "./Post";
 import Loader from "./Loader";
 

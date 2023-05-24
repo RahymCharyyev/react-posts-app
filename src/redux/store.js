@@ -4,7 +4,6 @@ import thunk from "redux-thunk";
 import rootReducer from "./reducers";
 import postSaga from "./sagas/postSaga";
 import userSaga from "./sagas/userSaga";
-import commentsSaga from "./sagas/commentsSaga";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -15,6 +14,5 @@ const store = legacy_createStore(
 
 sagaMiddleware.run(postSaga);
 sagaMiddleware.run(userSaga);
-sagaMiddleware.run(commentsSaga);
 
 export default store;
