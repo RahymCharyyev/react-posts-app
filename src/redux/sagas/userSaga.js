@@ -7,14 +7,12 @@ import {
   FETCH_USER_POSTS_SUCCESS,
   FETCH_USER_POSTS,
 } from "../actions/userActions";
+import { API_URL } from "../../api";
 
 function* fetchUser(action) {
   const userId = action.payload;
   try {
-    const response = yield call(
-      axios.get,
-      `https://jsonplaceholder.typicode.com/users/${userId}`
-    );
+    const response = yield call(axios.get, `${API_URL}/users/${userId}`);
     yield put({ type: FETCH_USER_SUCCESS, payload: response.data });
   } catch (error) {
     yield put({ type: FETCH_USER_FAILURE, payload: error.message });
@@ -24,10 +22,7 @@ function* fetchUser(action) {
 function* fetchUserPosts(action) {
   const userId = action.payload;
   try {
-    const response = yield call(
-      axios.get,
-      `https://jsonplaceholder.typicode.com/posts?userId=${userId}`
-    );
+    const response = yield call(axios.get, `${API_URL}/posts?userId=${userId}`);
     yield put({ type: FETCH_USER_POSTS_SUCCESS, payload: response.data });
   } catch (error) {
     yield put({ type: FETCH_USER_FAILURE, payload: error.message });

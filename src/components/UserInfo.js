@@ -12,14 +12,13 @@ const UserInfo = () => {
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
-    setShowLoader(true);
-
-    const delay = setTimeout(() => {
-      dispatch(fetchUser(userId));
+    const fetchData = async () => {
+      setShowLoader(true);
+      await dispatch(fetchUser(userId));
       setShowLoader(false);
-    }, 500);
+    };
 
-    return () => clearTimeout(delay);
+    fetchData();
   }, [dispatch, userId]);
 
   return (

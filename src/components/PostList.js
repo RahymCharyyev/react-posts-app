@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "../redux/actions/postActions";
-import { fetchComments } from "../redux/actions/postActions";
 import Post from "./Post";
 import Loader from "./Loader";
-
 import { Container, Row, Col } from "react-bootstrap";
 
 const PostList = () => {
@@ -13,14 +11,13 @@ const PostList = () => {
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
-    setShowLoader(true);
-
-    const delay = setTimeout(() => {
-      dispatch(fetchPosts());
+    const fetchData = async () => {
+      setShowLoader(true);
+      await dispatch(fetchPosts());
       setShowLoader(false);
-    }, 500);
+    };
 
-    return () => clearTimeout(delay);
+    fetchData();
   }, [dispatch]);
 
   return (
@@ -32,10 +29,7 @@ const PostList = () => {
           <Row xs={1} md={2} lg={3} xl={4} className="g-4">
             {posts.map((post) => (
               <Col key={post.id}>
-                <Post
-                  post={post}
-                  toggleComments={() => dispatch(fetchComments(post.id))}
-                />
+                <Post post={post} />
               </Col>
             ))}
           </Row>

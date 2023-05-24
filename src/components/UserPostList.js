@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { fetchUserPosts } from "../redux/actions/userActions";
 import { Col, Container, Row } from "react-bootstrap";
 import Post from "./Post";
-import { fetchComments } from "../redux/actions/postActions";
 import Loader from "./Loader";
 
 const UserPostList = () => {
@@ -14,13 +13,13 @@ const UserPostList = () => {
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
-    setShowLoader(true);
-    const delay = setTimeout(() => {
-      dispatch(fetchUserPosts(userId));
+    const fetchData = async () => {
+      setShowLoader(true);
+      await dispatch(fetchUserPosts(userId));
       setShowLoader(false);
-    }, 500);
+    };
 
-    return () => clearTimeout(delay);
+    fetchData();
   }, [dispatch, userId]);
 
   return (
@@ -32,10 +31,7 @@ const UserPostList = () => {
           <Row xs={1} md={2} lg={3} xl={4} className="g-4">
             {userPosts.map((post) => (
               <Col key={post.id}>
-                <Post
-                  post={post}
-                  toggleComments={() => dispatch(fetchComments(post.id))}
-                />
+                <Post post={post} />
               </Col>
             ))}
           </Row>

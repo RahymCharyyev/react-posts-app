@@ -12,7 +12,6 @@ const store = legacy_createStore(
   applyMiddleware(thunk, sagaMiddleware)
 );
 
-sagaMiddleware.run(postSaga);
-sagaMiddleware.run(userSaga);
+sagaMiddleware.run(postSaga, userSaga);
 
 export default store;

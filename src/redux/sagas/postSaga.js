@@ -8,13 +8,11 @@ import {
   FETCH_COMMENTS_SUCCESS,
   FETCH_COMMENTS_FAILURE,
 } from "../actions/postActions";
+import { API_URL } from "../../api";
 
 function* fetchPostsSaga() {
   try {
-    const response = yield call(
-      axios.get,
-      "https://jsonplaceholder.typicode.com/posts"
-    );
+    const response = yield call(axios.get, `${API_URL}/posts`);
     yield put({
       type: FETCH_POSTS_SUCCESS,
       payload: response.data,
@@ -28,7 +26,7 @@ function* fetchCommentsSaga(action) {
   try {
     const response = yield call(
       axios.get,
-      `https://jsonplaceholder.typicode.com/posts/${action.payload}/comments`
+      `${API_URL}/posts/${action.payload}/comments`
     );
     yield put({
       type: FETCH_COMMENTS_SUCCESS,

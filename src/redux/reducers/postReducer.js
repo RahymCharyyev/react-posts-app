@@ -10,6 +10,7 @@ const initialState = {
   posts: [],
   comments: {},
   isLoading: false,
+  error: null,
 };
 
 const postReducer = (state = initialState, action) => {
@@ -29,6 +30,7 @@ const postReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        error: action.payload,
       };
     case FETCH_COMMENTS_SUCCESS:
       return {
