@@ -28,7 +28,7 @@ const PostList = () => {
       {showLoader ? (
         <Loader />
       ) : (
-        <Container fluid>
+        <Container fluid style={{ padding: "50px" }}>
           <Row xs={1} md={2} lg={3} xl={4} className="g-4">
             {posts.map((post) => (
               <Col key={post.id}>

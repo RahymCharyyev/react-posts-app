@@ -42,7 +42,7 @@ const Post = ({ post }) => {
                 aria-controls={`comments${post.id}`}
                 className="mt-2 justify-content-center"
               >
-                {isOpen ? "Закрыть комментарии" : "Открыть комментарии"}
+                {isOpen ? "Скрыть комментарии" : "Показать комментарии"}
               </Button>
             </div>
             <Collapse in={isOpen}>

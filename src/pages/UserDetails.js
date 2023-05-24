@@ -12,9 +12,12 @@ const UserDetails = ({ match }) => {
   const isLoading = useSelector((state) => state.isLoading);
 
   useEffect(() => {
-    dispatch(fetchUser(match.params.userId));
-    dispatch(fetchUserPosts(match.params.userId));
-  }, [dispatch, match.params.userId]);
+    if (match && match.params && match.params.userId) {
+      const userId = match.params.userId;
+      dispatch(fetchUser(userId));
+      dispatch(fetchUserPosts(userId));
+    }
+  }, [dispatch, match]);
 
   return (
     <div>
@@ -24,9 +27,11 @@ const UserDetails = ({ match }) => {
         <>
           <UserInfo user={user} />
           <h1>Посты пользователя</h1>
-          {userPosts.map((post) => (
-            <Post key={post.id} post={post} />
-          ))}
+          {userPosts && userPosts.length > 0 ? (
+            userPosts.map((post) => <Post key={post.id} post={post} />)
+          ) : (
+            <p>No posts found.</p>
+          )}
         </>
       )}
     </div>

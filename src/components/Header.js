@@ -22,12 +22,8 @@ const Header = () => {
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
                   <Image src={img} width={30} height={30} />
-                  <span className="text-dark font-weight-bold">
-                    Чарыев Рахим
-                  </span>
-                  <span className="text-dark font-weight-bold">
-                    Email: r569837@gmail.com
-                  </span>
+                  <span>Чарыев Рахим</span>
+                  <span>Email: r569837@gmail.com</span>
                   <Menu />
                 </Nav>
               </Offcanvas.Body>

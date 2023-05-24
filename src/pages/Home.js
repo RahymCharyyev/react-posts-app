@@ -4,7 +4,7 @@ import PostList from "../components/PostList";
 const Home = () => {
   return (
     <div>
-      <h1>Список постов</h1>
+      <h1 className="text-center">Список постов</h1>
       <PostList />
     </div>
   );
