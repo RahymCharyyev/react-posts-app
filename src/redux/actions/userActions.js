@@ -9,7 +9,7 @@ export const FETCH_USER_POSTS_FAILURE = "FETCH_USER_POSTS_FAILURE";
 
 export const fetchUser = (userId) => {
   return (dispatch) => {
-    dispatch({ type: FETCH_USER });
+    dispatch({ type: FETCH_USER, payload: userId });
 
     axios
       .get(`https://jsonplaceholder.typicode.com/users/${userId}`)
@@ -24,7 +24,7 @@ export const fetchUser = (userId) => {
 
 export const fetchUserPosts = (userId) => {
   return (dispatch) => {
-    dispatch({ type: FETCH_USER_POSTS });
+    dispatch({ type: FETCH_USER_POSTS, payload: userId });
 
     axios
       .get(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
