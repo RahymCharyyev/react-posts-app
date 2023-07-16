@@ -34,7 +34,7 @@ const About = () => {
               ссылке ниже.
             </Card.Text>
             <div className="text-center">
-              <Button variant="primary" href="https://github.com/RahymCharyyev">
+              <Button variant="primary" href="https://linktr.ee/rahymcharyyev">
                 Моё портфолио
               </Button>
             </div>
