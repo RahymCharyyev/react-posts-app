@@ -49,7 +49,7 @@ This is a web application developed with React.js that contains posts, where the
 
 :heavy_check_mark: List of posts (main page), where all posts are located.\
 :heavy_check_mark: About me, where is a brief information about me.\
-:heavy_check_mark: Details about the user (when you need to display information about the user and a list of his posts).\
+:heavy_check_mark: Details about the user (when you need to display information about the user and a list of his posts).
 
 ## :rocket: Technologies
 
